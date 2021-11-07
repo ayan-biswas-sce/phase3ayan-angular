@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { StockExchange } from '../models/StockExchange';
 
-const BACKEND_URL = environment.apiUrl + '/stock-exchange-service/stockExchanges/';
+const BACKEND_URL = environment.apiUrl + '/stockExchanges/';
 
 @Injectable({providedIn: 'root'})
 export class StockExchangeService {

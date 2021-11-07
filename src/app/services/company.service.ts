@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { IPO } from '../models/IPO';
 
-const BACKEND_URL = environment.apiUrl + '/company-service/companies/';
+const BACKEND_URL = environment.apiUrl + '/companies/';
 
 @Injectable({providedIn: 'root'})
 export class CompanyService {

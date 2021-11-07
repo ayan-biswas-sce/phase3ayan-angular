@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Sector } from '../models/Sector';
 
-const BACKEND_URL = environment.apiUrl + '/sector-service/sectors/';
+const BACKEND_URL = environment.apiUrl + '/sectors/';
 
 @Injectable({providedIn: 'root'})
 export class SectorService {
