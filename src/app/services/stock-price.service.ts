@@ -17,7 +17,7 @@ export class StockPriceService {
   }
 
   public getStockPrices(): Observable<StockPrice[]> {
-    return this.http.get<StockPrice[]>(this.url + '/getstockprices');
+    return this.http.get<StockPrice[]>(this.url + 'getstockprices/');
   }
 
   getStockPrice(id: string): Observable<StockPrice> {
@@ -27,7 +27,7 @@ export class StockPriceService {
   addStockPriceList(stockPrices: StockPrice[]) {
     //console.log(stockPrices);
     this.http
-      .post<StockPrice[]>(this.url + '/addstockprices', stockPrices)
+      .post<StockPrice[]>(this.url + 'addstockprices/', stockPrices)
       .subscribe((responseData) => {
         console.log(responseData);
       });
@@ -36,7 +36,7 @@ export class StockPriceService {
     comparision: Comparison
   ): Observable<StockPrice[]> {
     return this.http.post<StockPrice[]>(
-      this.url + '/compareCompany',
+      this.url + 'compareCompany/',
       comparision
     );
 
@@ -44,19 +44,19 @@ export class StockPriceService {
   }
   updateStockPrice(stockPrice: StockPrice) {
     this.http.put(this.url, stockPrice).subscribe((response) => {
-      this.router.navigate(['/stock-prices']);
+      this.router.navigate(['stock-prices/']);
     });
   }
 
   deleteStockPrice(id: string) {
     this.http.delete(this.url + id).subscribe((response) => {
-      this.router.navigate(['/stock-prices']);
+      this.router.navigate(['stock-prices/']);
     });
   }
 
   getSectorStockPrices(comparsion: Comparison) {
     return this.http.post<StockPrice[]>(
-      this.url + '/compareSector',
+      this.url + 'compareSector/',
       comparsion
     );
   }
