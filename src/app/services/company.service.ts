@@ -19,7 +19,7 @@ export class CompanyService {
   }
 
   getCompanies(): Observable<Company[]> {
-    return this.http.get<Company[]>(this.url+"/companies");
+    return this.http.get<Company[]>(this.url+"companies/");
   }
 
   getCompany(id: string): Observable<Company> {
