@@ -13,7 +13,7 @@ export class StockPriceService {
   url: string;
   stockpricess: StockPrice[];
   constructor(private http: HttpClient, private router: Router) {
-    this.url = environment.apiUrl;
+    this.url = environment.apiUrl + "stockprices";
   }
 
   public getStockPrices(): Observable<StockPrice[]> {
