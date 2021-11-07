@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { StockExchange } from '../models/StockExchange';
 
-const BACKEND_URL = environment.apiUrl + 'stockExchanges/';
+const BACKEND_URL = environment.apiUrl + 'stockexchanges/';
 
 @Injectable({providedIn: 'root'})
 export class StockExchangeService {
@@ -35,21 +35,21 @@ export class StockExchangeService {
   addStockExchange(stockExchange: StockExchange) {
     this.http.post<StockExchange>(this.url, stockExchange)
       .subscribe((responseData) => {
-        this.router.navigate(['/stock-exchanges']);
+        this.router.navigate(['/stockexchanges']);
       });
   }
 
   updateStockExchange(stockExchange: StockExchange) {
     this.http.put(this.url, stockExchange)
       .subscribe(response => {
-        this.router.navigate(['/stock-exchanges']);
+        this.router.navigate(['/stockexchanges']);
       });
   }
 
   deleteStockExchange(id: string) {
     this.http.delete(this.url + id)
       .subscribe(response => {
-        this.router.navigate(['/stock-exchanges']);
+        this.router.navigate(['/stockexchanges']);
       });
   }
 }
