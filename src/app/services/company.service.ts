@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { IPO } from '../models/IPO';
 
-const BACKEND_URL = environment.apiUrl + '/companies/';
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({providedIn: 'root'})
 export class CompanyService {
@@ -19,7 +19,7 @@ export class CompanyService {
   }
 
   getCompanies(): Observable<Company[]> {
-    return this.http.get<Company[]>(this.url);
+    return this.http.get<Company[]>(this.url+"/companies");
   }
 
   getCompany(id: string): Observable<Company> {
