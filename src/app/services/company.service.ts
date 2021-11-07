@@ -33,21 +33,21 @@ export class CompanyService {
   addCompany(company: Company) {
     this.http.post<Company>(this.url, company)
       .subscribe((responseData) => {
-        this.router.navigate(['/companies']);
+        this.router.navigate(['companies']);
       });
   }
 
   updateCompany(company: Company) {
     this.http.put(this.url, company)
       .subscribe(response => {
-        this.router.navigate(['/companies']);
+        this.router.navigate(['companies']);
       });
   }
 
   deleteCompany(id: string) {
     this.http.delete(this.url + id)
       .subscribe(response => {
-        this.router.navigate(['/companies']);
+        this.router.navigate(['companies']);
       });
   }
 }
