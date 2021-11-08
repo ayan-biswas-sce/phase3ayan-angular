@@ -7,7 +7,7 @@ import { LoginData } from '../models/LoginData';
 import { User } from '../models/User';
 import { environment } from '../../environments/environment';
 
-const BACKEND_URL = environment.apiUrl;
+const BACKEND_URL = 'http://localhost:8080/';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +19,11 @@ export class AuthService {
   private tokenTimer: any;
   private username: string;
   private authStatusListener = new Subject<boolean>();
+  url:string;
 
-  constructor(public http: HttpClient, private router: Router) {}
+  constructor(public http: HttpClient, private router: Router) {
+    this.url = BACKEND_URL;
+  }
 
   getToken() {
     return this.token;
@@ -55,46 +58,55 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    const loginData: LoginData = {
-      username: username,
-      password: password,
-    };
-    console.log(loginData);
-    this.http
-      .post<{
-        token: string;
-        expiresIn: number;
-        username: string;
-        admin: boolean;
-      }>(BACKEND_URL + '/auth/login', loginData)
-      .subscribe(
-        (response) => {
-          console.log(response);
-          if (response.token) {
-            this.token = response.token;
-            const expiresInDuration = response.expiresIn;
-            this.setAuthTimer(expiresInDuration);
-            this.isAuthenticated = true;
-            this.admin = response.admin;
-            this.username = response.username;
-            const now = new Date();
-            const expirationDate = new Date(now.getTime() + expiresInDuration);
-            this.saveAuthData(
-              this.token,
-              expirationDate,
-              this.username,
-              this.admin
-            );
-            console.log(this.token, expirationDate, this.username, this.admin);
-            this.authStatusListener.next(true);
-            this.router.navigate(['/']);
-          }
-        },
-        (error) => {
-          console.log(error);
-          this.authStatusListener.next(false);
-        }
-      );
+    // const loginData: LoginData = {
+    //   username: username,
+    //   password: password,
+    // };
+    // console.log(loginData);
+    // this.http
+    //   .post<{
+    //     token: string;
+    //     expiresIn: number;
+    //     username: string;
+    //     admin: boolean;
+    //   }>(BACKEND_URL + '/auth/login', loginData)
+    //   .subscribe(
+    //     (response) => {
+    //       console.log(response);
+    //       if (response.token) {
+    //         this.token = response.token;
+    //         const expiresInDuration = response.expiresIn;
+    //         this.setAuthTimer(expiresInDuration);
+    //         this.isAuthenticated = true;
+    //         this.admin = response.admin;
+    //         this.username = response.username;
+    //         const now = new Date();
+    //         const expirationDate = new Date(now.getTime() + expiresInDuration);
+    //         this.saveAuthData(
+    //           this.token,
+    //           expirationDate,
+    //           this.username,
+    //           this.admin
+    //         );
+    //         console.log(this.token, expirationDate, this.username, this.admin);
+    //         this.authStatusListener.next(true);
+    //         this.router.navigate(['/']);
+    //       }
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //       this.authStatusListener.next(false);
+    //     }
+    //   );
+    if (username=="ayanbiswas@live.in" && password=="ayan"){
+      this.http.get(this.url+"companies/")
+      .subscribe(response => {
+        this.router.navigate(['companies/']);
+      });
+    }
+    else{
+      console.log("Invalid Credentials");
+    }
   }
 
   autoAuthUser() {

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,25 +11,27 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 export class LoginComponent implements OnInit, OnDestroy {
 
   isLoading = false;
-  private authStatusSubs: Subscription;
+  //private authStatusSubs: Subscription;
   username: string;
   password: string;
-
-  constructor(public authService: AuthService) { }
+  private router: Router
+  //constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.authStatusSubs = this.authService.getAuthStatusListener()
-      .subscribe(authStatus => {
-        this.isLoading = false;
-      });
+    console.log("Login");
+    // this.authStatusSubs = this.authService.getAuthStatusListener()
+    //   .subscribe(authStatus => {
+    //     this.isLoading = false;
+    //   });
   }
 
-  onSubmit() {
-    this.isLoading = true;
-    this.authService.login(this.username, this.password);
-  }
+  //onSubmit() {
+    //this.router.navigate(['http://localhost:8080']);
+    //this.isLoading = true;
+    //this.authService.login(this.username, this.password);
+  //}
 
   ngOnDestroy(): void {
-    this.authStatusSubs.unsubscribe();
+    //this.authStatusSubs.unsubscribe();
   }
 }
